@@ -16,10 +16,12 @@ public class PhotoService {
         this.photoRepository = photoRepository;
     }
 
+    @CacheEvict(value = "photosCache", allEntries = true)
     public void saveAll(List<Photo> photos) {
         photoRepository.saveAll(photos);
     }
 
+    @Cacheable("photosCache")
     public List<Photo> findAll() {
         return photoRepository.findAll();
     }
